@@ -1,10 +1,12 @@
 # SoundSleuth
 
-SoundSleuth is a Windows tool that finds out which program just made a sound. It watches every audio output, lists each sound with the program that played it, saves a short replay clip, and lets you mute or end that program with one click. It is a single `.exe` of about 50 KB that runs without installation or administrator rights, and it is licensed under MIT.
+SoundSleuth is a Windows tool that finds out which program just made a sound. It watches every audio output, lists each sound with the program that played it, saves a short replay clip, and lets you mute or end that program with one click. It is a single `.exe` of about 150 KB that runs without installation or administrator rights, and it is licensed under MIT.
 
 ![Release](https://img.shields.io/github/v/release/mhsutton07/SoundSleuth)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 ![Windows 10](https://img.shields.io/badge/platform-Windows%2010-informational)
+
+![SoundSleuth listing a mystery beeper, a test tone and a Windows system sound, each with the program, path, device, peak level, duration and saved clip](docs/screenshot.png)
 
 ## Install
 
@@ -92,6 +94,8 @@ build.cmd
 
 The result is `bin\SoundSleuth.exe`. The code is C# 5, WinForms, and direct Core Audio COM interop in `src\`.
 
+The app icon is `assets\SoundSleuth.ico`, drawn by `assets\make_icon.py` (needs Pillow). It is built into the exe, so there is nothing extra to ship.
+
 Tests are in `tests\`. `verify_console.sh` (run from Git Bash) plays short quiet tones from its own PowerShell process and checks the console output, log, and clips. `build_probe.cmd` builds `MuteProbe.exe`, which mutes and unmutes that tone's session.
 
 ## Non-goals
@@ -103,7 +107,7 @@ Tests are in `tests\`. `verify_console.sh` (run from Git Bash) plays short quiet
 
 ## Project status
 
-Version 1.0. Settings are not saved between runs.
+Version 1.1. Settings are not saved between runs.
 
 ## Contributing
 

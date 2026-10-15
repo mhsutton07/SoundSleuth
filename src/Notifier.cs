@@ -26,7 +26,7 @@ sealed class Notifier : IDisposable
         this.owner = owner;
         this.status = status;
         icon = new NotifyIcon();
-        icon.Icon = appIcon;
+        icon.Icon = new Icon(appIcon, SystemInformation.SmallIconSize);
         icon.Text = "SoundSleuth";
         icon.Visible = true;
         icon.BalloonTipShown += delegate { shown.Restart(); };

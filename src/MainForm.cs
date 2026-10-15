@@ -152,8 +152,18 @@ sealed class MainForm : Form
         return b;
     }
 
+    // The multi-size .ico is embedded as a managed resource (build.cmd /resource), so the
+    // window and tray get crisp 16/20/24 px frames instead of a downscaled 32 px one.
     static Icon LoadAppIcon()
     {
+        try
+        {
+            using (var s = typeof(MainForm).Assembly.GetManifestResourceStream("SoundSleuth.ico"))
+            {
+                if (s != null) return new Icon(s);
+            }
+        }
+        catch (Exception) { }
         try
         {
             Icon ic = Icon.ExtractAssociatedIcon(Application.ExecutablePath);

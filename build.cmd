@@ -9,7 +9,7 @@ if not exist "%CSC%" (
   exit /b 1
 )
 if not exist bin mkdir bin
-set "OPTS=/nologo /target:winexe /optimize+ /warnaserror+ /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Management.dll /win32manifest:app.manifest"
+set "OPTS=/nologo /target:winexe /optimize+ /warnaserror+ /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Management.dll /win32manifest:app.manifest /win32icon:assets\SoundSleuth.ico /resource:assets\SoundSleuth.ico,SoundSleuth.ico"
 "%CSC%" %OPTS% /out:bin\SoundSleuth.exe src\*.cs > "%TEMP%\ss_build.log" 2>&1
 set RC=%errorlevel%
 type "%TEMP%\ss_build.log"

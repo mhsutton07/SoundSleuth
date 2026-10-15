@@ -10,6 +10,19 @@ static class ProcessInfo
 {
     public static readonly uint OwnPid = (uint)Process.GetCurrentProcess().Id;
 
+    static readonly string OwnExeName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
+
+    // True for this process and for any other running copy of SoundSleuth. Each copy's loopback
+    // recorder owns an audio session whose meter mirrors whatever is playing, so another copy
+    // would otherwise show up as "playing" every sound this one records.
+    public static bool IsSoundSleuth(uint pid)
+    {
+        if (pid == OwnPid) return true;
+        string p = ExePath(pid);
+        return p.Length > 0 && p[0] != '(' &&
+            string.Equals(Path.GetFileName(p), OwnExeName, StringComparison.OrdinalIgnoreCase);
+    }
+
     const int CacheSeconds = 60;
     sealed class PathEntry { public string Path; public DateTime At; }
     sealed class LabelEntry { public string Label; public uint KillPid; public DateTime At; }

@@ -294,7 +294,7 @@ sealed class SessionMonitor
             uint pid = 0;
             int hr = s.GetProcessId(out pid);
             if (!sys && (hr < 0 || pid == 0)) return;
-            if (!sys && pid == ProcessInfo.OwnPid) return;
+            if (!sys && ProcessInfo.IsSoundSleuth(pid)) return;
 
             var ev = new SoundEvent
             {
